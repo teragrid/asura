@@ -82,8 +82,8 @@ Note the length-prefixing used in the socket implementation does not apply for G
 
 ## Usage
 
-The `abci-cli` tool wraps an ABCI client and can be used for probing/testing an ABCI server.
-For instance, `abci-cli test` will run a test sequence against a listening server running the Counter application (see below).
+The `asura-cli` tool wraps an ABCI client and can be used for probing/testing an ABCI server.
+For instance, `asura-cli test` will run a test sequence against a listening server running the Counter application (see below).
 It can also be used to run some example applications.
 See [the documentation](http://teragrid.readthedocs.io/en/master/) for more details.
 
@@ -91,11 +91,11 @@ See [the documentation](http://teragrid.readthedocs.io/en/master/) for more deta
 
 Check out the variety of example applications in the [example directory](example/).
 It also contains the code refered to by the `counter` and `kvstore` apps; these apps come
-built into the `abci-cli` binary.
+built into the `asura-cli` binary.
 
 #### Counter
 
-The `abci-cli counter` application illustrates nonce checking in transactions. It's code looks like:
+The `asura-cli counter` application illustrates nonce checking in transactions. It's code looks like:
 
 ```golang
 func cmdCounter(cmd *cobra.Command, args []string) error {
