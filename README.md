@@ -1,9 +1,9 @@
-# Application BlockChain Interface (ABCI)
+# Asura - Application BlockChain Interface (ABCI)
 
-[![CircleCI](https://circleci.com/gh/teragrid/abci.svg?style=svg)](https://circleci.com/gh/teragrid/abci)
+[![CircleCI](https://circleci.com/gh/teragrid/asura.svg?style=svg)](https://circleci.com/gh/teragrid/asura)
 
 Blockchains are systems for multi-master state machine replication.
-**ABCI** is an interface that defines the boundary between the replication engine (the blockchain),
+**Asura** is an interface that defines the boundary between the replication engine (the blockchain),
 and the state machine (the application).
 By using a socket protocol, we enable a consensus engine running in one process
 to manage an application state running in another.
@@ -13,11 +13,11 @@ The two guides to focus on are the `Application Development Guide` and `Using AB
 
 Previously, the ABCI was referred to as TMSP.
 
-The community has provided a number of addtional implementations, see the [Teragrid Ecosystem](https://teragrid.com/ecosystem)
+The community has provided a number of addtional implementations, see the [Teragrid Ecosystem](https://teragrid.network/ecosystem)
 
 ## Specification
 
-The [primary specification](https://github.com/teragrid/abci/blob/master/types/types.proto)
+The [primary specification](https://github.com/teragrid/asura/blob/master/types/types.proto)
 is made using Protocol Buffers. To build it, run
 
 ```
@@ -29,15 +29,15 @@ for details on compiling for other languages. Note we also include a [GRPC](http
 service definition.
 
 For the specification as an interface in Go, see the
-[types/application.go file](https://github.com/teragrid/abci/blob/master/types/application.go).
+[types/application.go file](https://github.com/teragrid/asura/blob/master/types/application.go).
 
 See the [spec file](specification.rst) for a detailed description of the message types.
 
 ## Install
 
 ```
-go get github.com/teragrid/abci
-cd $GOPATH/src/github.com/teragrid/abci
+go get github.com/teragrid/asura
+cd $GOPATH/src/github.com/teragrid/asura
 make get_vendor_deps
 make install
 ```
@@ -62,7 +62,7 @@ See the [examples](#examples) below for more information.
 
 ### Socket (TSP)
 
-ABCI is best implemented as a streaming protocol.
+Asura is best implemented as a streaming protocol.
 The socket implementation provides for asynchronous, ordered message passing over unix or tcp.
 Messages are serialized using Protobuf3 and length-prefixed with a [signed Varint](https://developers.google.com/protocol-buffers/docs/encoding?csw=1#signed-integers)
 
@@ -123,11 +123,11 @@ func cmdCounter(cmd *cobra.Command, args []string) error {
 }
 ```
 
-and can be found in [this file](cmd/abci-cli/abci-cli.go).
+and can be found in [this file](cmd/asura-cli/asura-cli.go).
 
 #### kvstore
 
-The `abci-cli kvstore` application, which illustrates a simple key-value Merkle tree
+The `asura-cli kvstore` application, which illustrates a simple key-value Merkle tree
 
 ```golang
 func cmdKVStore(cmd *cobra.Command, args []string) error {
