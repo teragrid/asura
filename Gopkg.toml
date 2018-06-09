@@ -43,9 +43,10 @@
   name = "github.com/stretchr/testify"
   version = "~1.2.1"
 
-# [[constraint]]
-#   name = "github.com/teragrid/teralibs"
-#   version = "0.8.1"
+[[constraint]]
+  name = "github.com/teragrid/teralibs"
+  branch = "master"
+  # version = "0.8.1"
 
 [[constraint]]
   name = "google.golang.org/grpc"
