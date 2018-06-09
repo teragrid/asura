@@ -61,12 +61,6 @@
   revision = "553a641470496b2327abcac10b36396bd98e45c9"
 
 [[projects]]
-  name = "github.com/inconshreveable/mousetrap"
-  packages = ["."]
-  revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
-  version = "v1.0"
-
-[[projects]]
   branch = "master"
   name = "github.com/jmhodges/levigo"
   packages = ["."]
@@ -88,18 +82,6 @@
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
-  version = "v1.0.0"
-
-[[projects]]
-  name = "github.com/spf13/cobra"
-  packages = ["."]
-  revision = "a1f051bc3eba734da4772d60e2d677f47cf93ef4"
-  version = "v0.0.2"
-
-[[projects]]
-  name = "github.com/spf13/pflag"
-  packages = ["."]
-  revision = "e57e3eeb33f795204c1ca35f56c44f83227c6e66"
   version = "v1.0.0"
 
 [[projects]]
@@ -131,14 +113,14 @@
   revision = "714f901b98fdb3aa954b4193d8cbd64a28d80cad"
 
 [[projects]]
+  branch = "master"
   name = "github.com/teragrid/teralibs"
   packages = [
     "common",
     "db",
     "log"
   ]
-  revision = "2e24b64fc121dcdf1cabceab8dc2f7257675483c"
-  version = "v0.8.1"
+  revision = "902ce4ac33bbbdcec038d62deabb0b595d5b0f55"
 
 [[projects]]
   branch = "master"
@@ -208,6 +190,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e42d4a691fb0d0db9c717394e580dd00b36ba9e185541f99fc56689338470123"
+  inputs-digest = "3385730d9622c6df380304d2be40fd7a1f416ec27cfe0b25756f1d1031ad95a1"
   solver-name = "gps-cdcl"
   solver-version = 1

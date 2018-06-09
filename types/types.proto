@@ -246,7 +246,7 @@ message Evidence {
 //----------------------------------------
 // Service Definition
 
-service asuraApplication {
+service AsuraApplication {
   rpc Echo(RequestEcho) returns (ResponseEcho) ;
   rpc Flush(RequestFlush) returns (ResponseFlush);
   rpc Info(RequestInfo) returns (ResponseInfo);

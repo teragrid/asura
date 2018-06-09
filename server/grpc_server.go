@@ -17,11 +17,11 @@ type GRPCServer struct {
 	listener net.Listener
 	server   *grpc.Server
 
-	app types.asuraApplicationServer
+	app types.AsuraApplicationServer
 }
 
 // NewGRPCServer returns a new gRPC asura server
-func NewGRPCServer(protoAddr string, app types.asuraApplicationServer) cmn.Service {
+func NewGRPCServer(protoAddr string, app types.AsuraApplicationServer) cmn.Service {
 	proto, addr := cmn.ProtocolAndAddress(protoAddr)
 	s := &GRPCServer{
 		proto:    proto,
@@ -29,7 +29,7 @@ func NewGRPCServer(protoAddr string, app types.asuraApplicationServer) cmn.Servi
 		listener: nil,
 		app:      app,
 	}
-	s.BaseService = *cmn.NewBaseService(nil, "asuraServer", s)
+	s.BaseService = *cmn.NewBaseService(nil, "AsuraServer", s)
 	return s
 }
 
@@ -45,7 +45,7 @@ func (s *GRPCServer) OnStart() error {
 	s.Logger.Info("Listening", "proto", s.proto, "addr", s.addr)
 	s.listener = ln
 	s.server = grpc.NewServer()
-	types.RegisterasuraApplicationServer(s.server, s.app)
+	types.RegisterAsuraApplicationServer(s.server, s.app)
 	go s.server.Serve(s.listener)
 	return nil
 }

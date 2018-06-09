@@ -13,7 +13,7 @@ The two guides to focus on are the `Application Development Guide` and `Using as
 
 Previously, the asura was referred to as TMSP.
 
-The community has provided a number of addtional implementations, see the [Teragrid Ecosystem](https://teragrid.network/ecosystem)
+The community has provided a number of additional implementations, see the [Teragrid Ecosystem](https://teragrid.network/ecosystem)
 
 ## Specification
 
