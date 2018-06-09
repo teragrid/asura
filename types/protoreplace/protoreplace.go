@@ -40,7 +40,7 @@ func main() {
 		}
 		if writeImportTime && !wroteImport {
 			wroteImport = true
-			fmt.Fprintf(outFile, "import \"github.com/tendermint/go-wire/data\"\n")
+			fmt.Fprintf(outFile, "import \"github.com/teragrid/go-wire/data\"\n")
 
 		}
 		if gotPackageLine {

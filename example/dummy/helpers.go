@@ -1,8 +1,8 @@
 package dummy
 
 import (
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 // RandVal creates one random validator, with a key derived

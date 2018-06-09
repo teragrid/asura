@@ -4,18 +4,18 @@ Specification
 Message Types
 ~~~~~~~~~~~~~
 
-ABCI requests/responses are defined as simple Protobuf messages in `this
+asura requests/responses are defined as simple Protobuf messages in `this
 schema
-file <https://github.com/tendermint/abci/blob/master/types/types.proto>`__.
-TendermintCore sends the requests, and the ABCI application sends the
+file <https://github.com/teragrid/asura/blob/master/types/types.proto>`__.
+teragridCore sends the requests, and the asura application sends the
 responses. Here, we provide an overview of the messages types and how they
-are used by Tendermint. Then we describe each request-response pair as a
+are used by teragrid. Then we describe each request-response pair as a
 function with arguments and return values, and add some notes on usage.
 
 Some messages (``Echo, Info, InitChain, BeginBlock, EndBlock, Commit``), don't
 return errors because an error would indicate a critical failure in the
-application and there's nothing Tendermint can do.  The problem should be
-addressed and both Tendermint and the application restarted.  All other
+application and there's nothing teragrid can do.  The problem should be
+addressed and both teragrid and the application restarted.  All other
 messages (``SetOption, Query, CheckTx, DeliverTx``) return an
 application-specific response ``Code uint32``, where only ``0`` is reserved for
 ``OK``.
@@ -25,7 +25,7 @@ non-deterministic data in the form of ``Info`` and ``Log``. The ``Log`` is
 intended for the literal output from the application's logger, while the
 ``Info`` is any additional info that should be returned.
 
-The first time a new blockchain is started, Tendermint calls ``InitChain``.
+The first time a new blockchain is started, teragrid calls ``InitChain``.
 From then on, the Block Execution Sequence that causes the committed state to
 be updated is as follows:
 
@@ -35,7 +35,7 @@ where one ``DeliverTx`` is called for each transaction in the block.
 Cryptographic commitments to the results of DeliverTx, EndBlock, and
 Commit are included in the header of the next block.
 
-Tendermint opens three connections to the application to handle the different message
+teragrid opens three connections to the application to handle the different message
 types:
 
 - ``Consensus Connection - InitChain, BeginBlock, DeliverTx, EndBlock, Commit``
@@ -67,7 +67,7 @@ Echo
 
 -  **Usage**:
 
-   -  Echo a string to test an abci client/server implementation
+   -  Echo a string to test an asura client/server implementation
 
 Flush
 ^^^^^
@@ -85,7 +85,7 @@ Info
 
 -  **Arguments**:
 
-   -  ``Version (string)``: The Tendermint version
+   -  ``Version (string)``: The teragrid version
 
 -  **Returns**:
 
@@ -98,9 +98,9 @@ Info
 -  **Usage**:
 
    - Return information about the application state.
-   - Used to sync Tendermint with the application during a handshake that
+   - Used to sync teragrid with the application during a handshake that
      happens on startup.
-   - Tendermint expects ``LastBlockAppHash`` and ``LastBlockHeight`` to be
+   - teragrid expects ``LastBlockAppHash`` and ``LastBlockHeight`` to be
      updated during ``Commit``, ensuring that ``Commit`` is never called twice
      for the same block height.
 
@@ -218,13 +218,13 @@ CheckTx
    of the validity of the transaction (like checking signatures and account balances),
    but need not execute in full (like running a smart contract).
 
-   Tendermint runs CheckTx and DeliverTx concurrently with eachother,
-   though on distinct ABCI connections - the mempool connection and the consensus
+   teragrid runs CheckTx and DeliverTx concurrently with eachother,
+   though on distinct asura connections - the mempool connection and the consensus
    connection, respectively.
 
    The application should maintain a separate state to support CheckTx.
    This state can be reset to the latest committed state during ``Commit``,
-   where Tendermint ensures the mempool is locked and not sending new ``CheckTx``.
+   where teragrid ensures the mempool is locked and not sending new ``CheckTx``.
    After ``Commit``, the mempool will rerun CheckTx on all remaining
    transactions, throwing out any that are no longer valid.
 

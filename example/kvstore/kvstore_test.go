@@ -8,13 +8,13 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	cmn "github.com/tendermint/tmlibs/common"
-	"github.com/tendermint/tmlibs/log"
+	cmn "github.com/teragrid/teralibs/common"
+	"github.com/teragrid/teralibs/log"
 
-	abcicli "github.com/tendermint/abci/client"
-	"github.com/tendermint/abci/example/code"
-	abciserver "github.com/tendermint/abci/server"
-	"github.com/tendermint/abci/types"
+	asuracli "github.com/teragrid/asura/client"
+	"github.com/teragrid/asura/example/code"
+	asuraserver "github.com/teragrid/asura/server"
+	"github.com/teragrid/asura/types"
 )
 
 func testKVStore(t *testing.T, app types.Application, tx []byte, key, value string) {
@@ -55,7 +55,7 @@ func TestKVStoreKV(t *testing.T) {
 }
 
 func TestPersistentKVStoreKV(t *testing.T) {
-	dir, err := ioutil.TempDir("/tmp", "abci-kvstore-test") // TODO
+	dir, err := ioutil.TempDir("/tmp", "asura-kvstore-test") // TODO
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -71,7 +71,7 @@ func TestPersistentKVStoreKV(t *testing.T) {
 }
 
 func TestPersistentKVStoreInfo(t *testing.T) {
-	dir, err := ioutil.TempDir("/tmp", "abci-kvstore-test") // TODO
+	dir, err := ioutil.TempDir("/tmp", "asura-kvstore-test") // TODO
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -103,7 +103,7 @@ func TestPersistentKVStoreInfo(t *testing.T) {
 
 // add a validator, remove a validator, update a validator
 func TestValUpdates(t *testing.T) {
-	dir, err := ioutil.TempDir("/tmp", "abci-kvstore-test") // TODO
+	dir, err := ioutil.TempDir("/tmp", "asura-kvstore-test") // TODO
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,20 +205,20 @@ func valsEqual(t *testing.T, vals1, vals2 []types.Validator) {
 	}
 }
 
-func makeSocketClientServer(app types.Application, name string) (abcicli.Client, cmn.Service, error) {
+func makeSocketClientServer(app types.Application, name string) (asuracli.Client, cmn.Service, error) {
 	// Start the listener
 	socket := cmn.Fmt("unix://%s.sock", name)
 	logger := log.TestingLogger()
 
-	server := abciserver.NewSocketServer(socket, app)
-	server.SetLogger(logger.With("module", "abci-server"))
+	server := asuraserver.NewSocketServer(socket, app)
+	server.SetLogger(logger.With("module", "asura-server"))
 	if err := server.Start(); err != nil {
 		return nil, nil, err
 	}
 
 	// Connect to the socket
-	client := abcicli.NewSocketClient(socket, false)
-	client.SetLogger(logger.With("module", "abci-client"))
+	client := asuracli.NewSocketClient(socket, false)
+	client.SetLogger(logger.With("module", "asura-client"))
 	if err := client.Start(); err != nil {
 		server.Stop()
 		return nil, nil, err
@@ -227,20 +227,20 @@ func makeSocketClientServer(app types.Application, name string) (abcicli.Client,
 	return client, server, nil
 }
 
-func makeGRPCClientServer(app types.Application, name string) (abcicli.Client, cmn.Service, error) {
+func makeGRPCClientServer(app types.Application, name string) (asuracli.Client, cmn.Service, error) {
 	// Start the listener
 	socket := cmn.Fmt("unix://%s.sock", name)
 	logger := log.TestingLogger()
 
 	gapp := types.NewGRPCApplication(app)
-	server := abciserver.NewGRPCServer(socket, gapp)
-	server.SetLogger(logger.With("module", "abci-server"))
+	server := asuraserver.NewGRPCServer(socket, gapp)
+	server.SetLogger(logger.With("module", "asura-server"))
 	if err := server.Start(); err != nil {
 		return nil, nil, err
 	}
 
-	client := abcicli.NewGRPCClient(socket, true)
-	client.SetLogger(logger.With("module", "abci-client"))
+	client := asuracli.NewGRPCClient(socket, true)
+	client.SetLogger(logger.With("module", "asura-client"))
 	if err := client.Start(); err != nil {
 		server.Stop()
 		return nil, nil, err
@@ -268,7 +268,7 @@ func TestClientServer(t *testing.T) {
 	runClientTests(t, gclient)
 }
 
-func runClientTests(t *testing.T, client abcicli.Client) {
+func runClientTests(t *testing.T, client asuracli.Client) {
 	// run some tests....
 	key := "abc"
 	value := key
@@ -280,7 +280,7 @@ func runClientTests(t *testing.T, client abcicli.Client) {
 	testClient(t, client, tx, key, value)
 }
 
-func testClient(t *testing.T, app abcicli.Client, tx []byte, key, value string) {
+func testClient(t *testing.T, app asuracli.Client, tx []byte, key, value string) {
 	ar, err := app.DeliverTxSync(tx)
 	require.NoError(t, err)
 	require.False(t, ar.IsErr(), ar)

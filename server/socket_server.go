@@ -7,8 +7,8 @@ import (
 	"net"
 	"sync"
 
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 // var maxNumberConnections = 2
@@ -37,7 +37,7 @@ func NewSocketServer(protoAddr string, app types.Application) cmn.Service {
 		app:      app,
 		conns:    make(map[int]net.Conn),
 	}
-	s.BaseService = *cmn.NewBaseService(nil, "ABCIServer", s)
+	s.BaseService = *cmn.NewBaseService(nil, "asuraServer", s)
 	return s
 }
 

@@ -5,8 +5,8 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 type GRPCServer struct {
@@ -17,11 +17,11 @@ type GRPCServer struct {
 	listener net.Listener
 	server   *grpc.Server
 
-	app types.ABCIApplicationServer
+	app types.asuraApplicationServer
 }
 
-// NewGRPCServer returns a new gRPC ABCI server
-func NewGRPCServer(protoAddr string, app types.ABCIApplicationServer) cmn.Service {
+// NewGRPCServer returns a new gRPC asura server
+func NewGRPCServer(protoAddr string, app types.asuraApplicationServer) cmn.Service {
 	proto, addr := cmn.ProtocolAndAddress(protoAddr)
 	s := &GRPCServer{
 		proto:    proto,
@@ -29,7 +29,7 @@ func NewGRPCServer(protoAddr string, app types.ABCIApplicationServer) cmn.Servic
 		listener: nil,
 		app:      app,
 	}
-	s.BaseService = *cmn.NewBaseService(nil, "ABCIServer", s)
+	s.BaseService = *cmn.NewBaseService(nil, "asuraServer", s)
 	return s
 }
 
@@ -45,7 +45,7 @@ func (s *GRPCServer) OnStart() error {
 	s.Logger.Info("Listening", "proto", s.proto, "addr", s.addr)
 	s.listener = ln
 	s.server = grpc.NewServer()
-	types.RegisterABCIApplicationServer(s.server, s.app)
+	types.RegisterasuraApplicationServer(s.server, s.app)
 	go s.server.Serve(s.listener)
 	return nil
 }

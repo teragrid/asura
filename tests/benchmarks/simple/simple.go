@@ -7,8 +7,8 @@ import (
 	"net"
 	"reflect"
 
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 func main() {

@@ -1,10 +1,10 @@
-package abcicli
+package asuracli
 
 import (
 	"sync"
 
-	types "github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	types "github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 var _ Client = (*localClient)(nil)

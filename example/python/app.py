@@ -1,8 +1,8 @@
 import sys
 
-from abci.wire import hex2bytes, decode_big_endian, encode_big_endian
-from abci.server import ABCIServer
-from abci.reader import BytesBuffer
+from asura.wire import hex2bytes, decode_big_endian, encode_big_endian
+from asura.server import asuraServer
+from asura.reader import BytesBuffer
 
 
 class CounterApplication():
@@ -75,8 +75,8 @@ if __name__ == '__main__':
         print "too many arguments"
         quit()
 
-    print 'ABCI Demo APP (Python)'
+    print 'asura Demo APP (Python)'
 
     app = CounterApplication()
-    server = ABCIServer(app, port)
+    server = asuraServer(app, port)
     server.main_loop()

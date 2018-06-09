@@ -26,9 +26,9 @@ class Connection():
             raise IOError("dead connection")
         this.recBuf.write(data)
 
-# ABCI server responds to messges by calling methods on the app
+# asura server responds to messges by calling methods on the app
 
-class ABCIServer():
+class asuraServer():
 
     def __init__(self, app, port=5410):
         self.app = app

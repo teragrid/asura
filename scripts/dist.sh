@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-REPO_NAME="abci"
+REPO_NAME="asura"
 
 # Get the version from the environment, or try to figure it out.
 if [ -z $VERSION ]; then
@@ -28,8 +28,8 @@ mkdir -p build/pkg
 
 
 # Do a hermetic build inside a Docker container.
-docker build -t tendermint/${REPO_NAME}-builder scripts/${REPO_NAME}-builder/
-docker run --rm -e "BUILD_TAGS=$BUILD_TAGS" -v "$(pwd)":/go/src/github.com/tendermint/${REPO_NAME} tendermint/${REPO_NAME}-builder ./scripts/dist_build.sh
+docker build -t teragrid/${REPO_NAME}-builder scripts/${REPO_NAME}-builder/
+docker run --rm -e "BUILD_TAGS=$BUILD_TAGS" -v "$(pwd)":/go/src/github.com/teragrid/${REPO_NAME} teragrid/${REPO_NAME}-builder ./scripts/dist_build.sh
 
 # Add $REPO_NAME and $VERSION prefix to package name.
 rm -rf ./build/dist

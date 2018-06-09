@@ -5,9 +5,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	abciclient "github.com/tendermint/abci/client"
-	"github.com/tendermint/abci/example/kvstore"
-	abciserver "github.com/tendermint/abci/server"
+	asuraclient "github.com/teragrid/asura/client"
+	"github.com/teragrid/asura/example/kvstore"
+	asuraserver "github.com/teragrid/asura/server"
 )
 
 func TestClientServerNoAddrPrefix(t *testing.T) {
@@ -15,12 +15,12 @@ func TestClientServerNoAddrPrefix(t *testing.T) {
 	transport := "socket"
 	app := kvstore.NewKVStoreApplication()
 
-	server, err := abciserver.NewServer(addr, transport, app)
+	server, err := asuraserver.NewServer(addr, transport, app)
 	assert.NoError(t, err, "expected no error on NewServer")
 	err = server.Start()
 	assert.NoError(t, err, "expected no error on server.Start")
 
-	client, err := abciclient.NewClient(addr, transport, true)
+	client, err := asuraclient.NewClient(addr, transport, true)
 	assert.NoError(t, err, "expected no error on NewClient")
 	err = client.Start()
 	assert.NoError(t, err, "expected no error on client.Start")

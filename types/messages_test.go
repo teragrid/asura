@@ -8,7 +8,7 @@ import (
 
 	"github.com/gogo/protobuf/proto"
 	"github.com/stretchr/testify/assert"
-	cmn "github.com/tendermint/tmlibs/common"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 func TestMarshalJSON(t *testing.T) {

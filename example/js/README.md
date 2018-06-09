@@ -1,1 +1,1 @@
-This example has been moved here: https://github.com/tendermint/js-abci/tree/master/example
+This example has been moved here: https://github.com/teragrid/js-asura/tree/master/example

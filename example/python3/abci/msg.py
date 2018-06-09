@@ -13,7 +13,7 @@ message_types = {
     0x25: "rm_listener",
 }
 
-# return the decoded arguments of abci messages
+# return the decoded arguments of asura messages
 
 class RequestDecoder():
 

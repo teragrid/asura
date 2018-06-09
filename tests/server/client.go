@@ -5,12 +5,12 @@ import (
 	"errors"
 	"fmt"
 
-	abcicli "github.com/tendermint/abci/client"
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	asuracli "github.com/teragrid/asura/client"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
-func InitChain(client abcicli.Client) error {
+func InitChain(client asuracli.Client) error {
 	total := 10
 	vals := make([]types.Validator, total)
 	for i := 0; i < total; i++ {
@@ -30,7 +30,7 @@ func InitChain(client abcicli.Client) error {
 	return nil
 }
 
-func SetOption(client abcicli.Client, key, value string) error {
+func SetOption(client asuracli.Client, key, value string) error {
 	_, err := client.SetOptionSync(types.RequestSetOption{Key: key, Value: value})
 	if err != nil {
 		fmt.Println("Failed test: SetOption")
@@ -41,7 +41,7 @@ func SetOption(client abcicli.Client, key, value string) error {
 	return nil
 }
 
-func Commit(client abcicli.Client, hashExp []byte) error {
+func Commit(client asuracli.Client, hashExp []byte) error {
 	res, err := client.CommitSync()
 	data := res.Data
 	if err != nil {
@@ -58,7 +58,7 @@ func Commit(client abcicli.Client, hashExp []byte) error {
 	return nil
 }
 
-func DeliverTx(client abcicli.Client, txBytes []byte, codeExp uint32, dataExp []byte) error {
+func DeliverTx(client asuracli.Client, txBytes []byte, codeExp uint32, dataExp []byte) error {
 	res, _ := client.DeliverTxSync(txBytes)
 	code, data, log := res.Code, res.Data, res.Log
 	if code != codeExp {
@@ -77,7 +77,7 @@ func DeliverTx(client abcicli.Client, txBytes []byte, codeExp uint32, dataExp []
 	return nil
 }
 
-func CheckTx(client abcicli.Client, txBytes []byte, codeExp uint32, dataExp []byte) error {
+func CheckTx(client asuracli.Client, txBytes []byte, codeExp uint32, dataExp []byte) error {
 	res, _ := client.CheckTxSync(txBytes)
 	code, data, log := res.Code, res.Data, res.Log
 	if code != codeExp {

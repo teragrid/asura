@@ -1,7 +1,7 @@
 #! /bin/bash
 set -e
 
-# These tests spawn the counter app and server by execing the ABCI_APP command and run some simple client tests against it
+# These tests spawn the counter app and server by execing the asura_APP command and run some simple client tests against it
 
 # Get the directory of where this script is.
 SOURCE="${BASH_SOURCE[0]}"
@@ -13,15 +13,15 @@ cd "$DIR"
 
 echo "RUN COUNTER OVER SOCKET"
 # test golang counter
-ABCI_APP="counter" go run  ./*.go
+asura_APP="counter" go run  ./*.go
 echo "----------------------"
 
 
 echo "RUN COUNTER OVER GRPC"
 # test golang counter via grpc
-ABCI_APP="counter --abci=grpc" ABCI="grpc" go run ./*.go
+asura_APP="counter --asura=grpc" asura="grpc" go run ./*.go
 echo "----------------------"
 
 # test nodejs counter
 # TODO: fix node app
-#ABCI_APP="node $GOPATH/src/github.com/tendermint/js-abci/example/app.js" go test -test.run TestCounter
+#asura_APP="node $GOPATH/src/github.com/teragrid/js-asura/example/app.js" go test -test.run TestCounter

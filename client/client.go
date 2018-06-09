@@ -1,11 +1,11 @@
-package abcicli
+package asuracli
 
 import (
 	"fmt"
 	"sync"
 
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 const (
@@ -13,11 +13,11 @@ const (
 	echoRetryIntervalSeconds = 1
 )
 
-// Client defines an interface for an ABCI client.
+// Client defines an interface for an asura client.
 // All `Async` methods return a `ReqRes` object.
 // All `Sync` methods return the appropriate protobuf ResponseXxx struct and an error.
-// Note these are client errors, eg. ABCI socket connectivity issues.
-// Application-related errors are reflected in response via ABCI error codes and logs.
+// Note these are client errors, eg. asura socket connectivity issues.
+// Application-related errors are reflected in response via asura error codes and logs.
 type Client interface {
 	cmn.Service
 
@@ -51,7 +51,7 @@ type Client interface {
 
 //----------------------------------------
 
-// NewClient returns a new ABCI client of the specified transport type.
+// NewClient returns a new asura client of the specified transport type.
 // It returns an error if the transport is not "socket" or "grpc"
 func NewClient(addr, transport string, mustConnect bool) (client Client, err error) {
 	switch transport {
@@ -60,7 +60,7 @@ func NewClient(addr, transport string, mustConnect bool) (client Client, err err
 	case "grpc":
 		client = NewGRPCClient(addr, mustConnect)
 	default:
-		err = fmt.Errorf("Unknown abci transport %s", transport)
+		err = fmt.Errorf("Unknown asura transport %s", transport)
 	}
 	return
 }

@@ -4,9 +4,9 @@ package types;
 // For more information on gogo.proto, see:
 // https://github.com/gogo/protobuf/blob/master/extensions.md
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "github.com/tendermint/tmlibs/common/types.proto";
+import "github.com/teragrid/teralibs/common/types.proto";
 
-// This file is copied from http://github.com/tendermint/abci
+// This file is copied from http://github.com/teragrid/asura
 // NOTE: When using custom types, mind the warnings.
 // https://github.com/gogo/protobuf/blob/master/custom_types.md#warnings-and-issues
 
@@ -181,7 +181,7 @@ message ResponseCommit {
 // Misc.
 
 // ConsensusParams contains all consensus-relevant parameters
-// that can be adjusted by the abci app
+// that can be adjusted by the asura app
 message ConsensusParams {
   BlockSize block_size = 1;
   TxSize tx_size = 2;
@@ -246,7 +246,7 @@ message Evidence {
 //----------------------------------------
 // Service Definition
 
-service ABCIApplication {
+service asuraApplication {
   rpc Echo(RequestEcho) returns (ResponseEcho) ;
   rpc Flush(RequestFlush) returns (ResponseFlush);
   rpc Info(RequestInfo) returns (ResponseInfo);

@@ -4,9 +4,9 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"github.com/tendermint/abci/example/code"
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/example/code"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 type CounterApplication struct {
@@ -31,7 +31,7 @@ func (app *CounterApplication) SetOption(req types.RequestSetOption) types.Respo
 		app.serial = true
 	} else {
 		/*
-			TODO Panic and have the ABCI server pass an exception.
+			TODO Panic and have the asura server pass an exception.
 			The client can call SetOptionSync() and get an `error`.
 			return types.ResponseSetOption{
 				Error: cmn.Fmt("Unknown key (%s) or value (%s)", key, value),

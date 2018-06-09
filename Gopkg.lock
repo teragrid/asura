@@ -131,7 +131,7 @@
   revision = "714f901b98fdb3aa954b4193d8cbd64a28d80cad"
 
 [[projects]]
-  name = "github.com/tendermint/tmlibs"
+  name = "github.com/teragrid/teralibs"
   packages = [
     "common",
     "db",

@@ -7,16 +7,16 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/tendermint/abci/example/code"
-	"github.com/tendermint/abci/types"
+	"github.com/teragrid/asura/example/code"
+	"github.com/teragrid/asura/types"
 )
 
-var abciType string
+var asuraType string
 
 func init() {
-	abciType = os.Getenv("ABCI")
-	if abciType == "" {
-		abciType = "socket"
+	asuraType = os.Getenv("asura")
+	if asuraType == "" {
+		asuraType = "socket"
 	}
 }
 
@@ -25,14 +25,14 @@ func main() {
 }
 
 const (
-	maxABCIConnectTries = 10
+	maxasuraConnectTries = 10
 )
 
-func ensureABCIIsUp(typ string, n int) error {
+func ensureasuraIsUp(typ string, n int) error {
 	var err error
-	cmdString := "abci-cli echo hello"
+	cmdString := "asura-cli echo hello"
 	if typ == "grpc" {
-		cmdString = "abci-cli --abci grpc echo hello"
+		cmdString = "asura-cli --asura grpc echo hello"
 	}
 
 	for i := 0; i < n; i++ {
@@ -47,25 +47,25 @@ func ensureABCIIsUp(typ string, n int) error {
 }
 
 func testCounter() {
-	abciApp := os.Getenv("ABCI_APP")
-	if abciApp == "" {
-		panic("No ABCI_APP specified")
+	asuraApp := os.Getenv("asura_APP")
+	if asuraApp == "" {
+		panic("No asura_APP specified")
 	}
 
-	fmt.Printf("Running %s test with abci=%s\n", abciApp, abciType)
-	cmd := exec.Command("bash", "-c", fmt.Sprintf("abci-cli %s", abciApp)) // nolint: gas
+	fmt.Printf("Running %s test with asura=%s\n", asuraApp, asuraType)
+	cmd := exec.Command("bash", "-c", fmt.Sprintf("asura-cli %s", asuraApp)) // nolint: gas
 	cmd.Stdout = os.Stdout
 	if err := cmd.Start(); err != nil {
-		log.Fatalf("starting %q err: %v", abciApp, err)
+		log.Fatalf("starting %q err: %v", asuraApp, err)
 	}
 	defer cmd.Wait()
 	defer cmd.Process.Kill()
 
-	if err := ensureABCIIsUp(abciType, maxABCIConnectTries); err != nil {
+	if err := ensureasuraIsUp(asuraType, maxasuraConnectTries); err != nil {
 		log.Fatalf("echo failed: %v", err)
 	}
 
-	client := startClient(abciType)
+	client := startClient(asuraType)
 	defer client.Stop()
 
 	setOption(client, "serial", "on")

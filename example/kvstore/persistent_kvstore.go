@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tendermint/abci/example/code"
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
-	dbm "github.com/tendermint/tmlibs/db"
-	"github.com/tendermint/tmlibs/log"
+	"github.com/teragrid/asura/example/code"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
+	dbm "github.com/teragrid/teralibs/db"
+	"github.com/teragrid/teralibs/log"
 )
 
 const (

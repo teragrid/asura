@@ -5,7 +5,7 @@ import (
 )
 
 // Application is an interface that enables any finite, deterministic state machine
-// to be driven by a blockchain-based replication engine via the ABCI.
+// to be driven by a blockchain-based replication engine via the asura.
 // All methods take a RequestXxx argument and return a ResponseXxx argument,
 // except CheckTx/DeliverTx, which take `tx []byte`, and `Commit`, which takes nothing.
 type Application interface {
@@ -18,7 +18,7 @@ type Application interface {
 	CheckTx(tx []byte) ResponseCheckTx // Validate a tx for the mempool
 
 	// Consensus Connection
-	InitChain(RequestInitChain) ResponseInitChain    // Initialize blockchain with validators and other info from TendermintCore
+	InitChain(RequestInitChain) ResponseInitChain    // Initialize blockchain with validators and other info from teragridCore
 	BeginBlock(RequestBeginBlock) ResponseBeginBlock // Signals the beginning of a block
 	DeliverTx(tx []byte) ResponseDeliverTx           // Deliver a tx for full processing
 	EndBlock(RequestEndBlock) ResponseEndBlock       // Signals the end of a block, returns changes to the validator set

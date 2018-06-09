@@ -11,14 +11,14 @@ import (
 
 	"golang.org/x/net/context"
 
-	cmn "github.com/tendermint/tmlibs/common"
-	"github.com/tendermint/tmlibs/log"
+	cmn "github.com/teragrid/teralibs/common"
+	"github.com/teragrid/teralibs/log"
 
-	abcicli "github.com/tendermint/abci/client"
-	"github.com/tendermint/abci/example/code"
-	"github.com/tendermint/abci/example/kvstore"
-	abciserver "github.com/tendermint/abci/server"
-	"github.com/tendermint/abci/types"
+	asuracli "github.com/teragrid/asura/client"
+	"github.com/teragrid/asura/example/code"
+	"github.com/teragrid/asura/example/kvstore"
+	asuraserver "github.com/teragrid/asura/server"
+	"github.com/teragrid/asura/types"
 )
 
 func TestKVStore(t *testing.T) {
@@ -40,16 +40,16 @@ func testStream(t *testing.T, app types.Application) {
 	numDeliverTxs := 200000
 
 	// Start the listener
-	server := abciserver.NewSocketServer("unix://test.sock", app)
-	server.SetLogger(log.TestingLogger().With("module", "abci-server"))
+	server := asuraserver.NewSocketServer("unix://test.sock", app)
+	server.SetLogger(log.TestingLogger().With("module", "asura-server"))
 	if err := server.Start(); err != nil {
 		t.Fatalf("Error starting socket server: %v", err.Error())
 	}
 	defer server.Stop()
 
 	// Connect to the socket
-	client := abcicli.NewSocketClient("unix://test.sock", false)
-	client.SetLogger(log.TestingLogger().With("module", "abci-client"))
+	client := asuracli.NewSocketClient("unix://test.sock", false)
+	client.SetLogger(log.TestingLogger().With("module", "asura-client"))
 	if err := client.Start(); err != nil {
 		t.Fatalf("Error starting socket client: %v", err.Error())
 	}
@@ -113,8 +113,8 @@ func testGRPCSync(t *testing.T, app *types.GRPCApplication) {
 	numDeliverTxs := 2000
 
 	// Start the listener
-	server := abciserver.NewGRPCServer("unix://test.sock", app)
-	server.SetLogger(log.TestingLogger().With("module", "abci-server"))
+	server := asuraserver.NewGRPCServer("unix://test.sock", app)
+	server.SetLogger(log.TestingLogger().With("module", "asura-server"))
 	if err := server.Start(); err != nil {
 		t.Fatalf("Error starting GRPC server: %v", err.Error())
 	}
@@ -127,7 +127,7 @@ func testGRPCSync(t *testing.T, app *types.GRPCApplication) {
 	}
 	defer conn.Close()
 
-	client := types.NewABCIApplicationClient(conn)
+	client := types.NewasuraApplicationClient(conn)
 
 	// Write requests
 	for counter := 0; counter < numDeliverTxs; counter++ {

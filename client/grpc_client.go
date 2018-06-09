@@ -1,4 +1,4 @@
-package abcicli
+package asuracli
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ import (
 	context "golang.org/x/net/context"
 	grpc "google.golang.org/grpc"
 
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 var _ Client = (*grpcClient)(nil)
@@ -21,7 +21,7 @@ type grpcClient struct {
 	cmn.BaseService
 	mustConnect bool
 
-	client types.ABCIApplicationClient
+	client types.asuraApplicationClient
 
 	mtx   sync.Mutex
 	addr  string
@@ -53,13 +53,13 @@ RETRY_LOOP:
 			if cli.mustConnect {
 				return err
 			}
-			cli.Logger.Error(fmt.Sprintf("abci.grpcClient failed to connect to %v.  Retrying...\n", cli.addr))
+			cli.Logger.Error(fmt.Sprintf("asura.grpcClient failed to connect to %v.  Retrying...\n", cli.addr))
 			time.Sleep(time.Second * dialRetryIntervalSeconds)
 			continue RETRY_LOOP
 		}
 
 		cli.Logger.Info("Dialed server. Waiting for echo.", "addr", cli.addr)
-		client := types.NewABCIApplicationClient(conn)
+		client := types.NewasuraApplicationClient(conn)
 
 	ENSURE_CONNECTED:
 		for {
@@ -97,7 +97,7 @@ func (cli *grpcClient) StopForError(err error) {
 	}
 	cli.mtx.Unlock()
 
-	cli.Logger.Error(fmt.Sprintf("Stopping abci.grpcClient for error: %v", err.Error()))
+	cli.Logger.Error(fmt.Sprintf("Stopping asura.grpcClient for error: %v", err.Error()))
 	cli.Stop()
 }
 

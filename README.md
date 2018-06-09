@@ -1,4 +1,4 @@
-# Asura - Application BlockChain Interface (ABCI)
+# Asura - Application BlockChain Interface (asura)
 
 [![CircleCI](https://circleci.com/gh/teragrid/asura.svg?style=svg)](https://circleci.com/gh/teragrid/asura)
 
@@ -8,10 +8,10 @@ and the state machine (the application).
 By using a socket protocol, we enable a consensus engine running in one process
 to manage an application state running in another.
 
-For background information on ABCI, motivations, and teragrid, please visit [the documentation](http://teragrid.readthedocs.io/en/master/).
-The two guides to focus on are the `Application Development Guide` and `Using ABCI-CLI`.
+For background information on asura, motivations, and teragrid, please visit [the documentation](http://teragrid.readthedocs.io/en/master/).
+The two guides to focus on are the `Application Development Guide` and `Using asura-CLI`.
 
-Previously, the ABCI was referred to as TMSP.
+Previously, the asura was referred to as TMSP.
 
 The community has provided a number of addtional implementations, see the [Teragrid Ecosystem](https://teragrid.network/ecosystem)
 
@@ -44,10 +44,10 @@ make install
 
 ## Implementation
 
-We provide three implementations of the ABCI in Go:
+We provide three implementations of the asura in Go:
 
 - Golang in-process
-- ABCI-socket
+- asura-socket
 - GRPC
 
 Note the GRPC version is maintained primarily to simplify onboarding and prototyping and is not receiving the same
@@ -56,7 +56,7 @@ attention to security and performance as the others
 ### In Process
 
 The simplest implementation just uses function calls within Go.
-This means ABCI applications written in Golang can be compiled with TeragridCore and run as a single binary.
+This means asura applications written in Golang can be compiled with TeragridCore and run as a single binary.
 
 See the [examples](#examples) below for more information.
 
@@ -66,8 +66,8 @@ Asura is best implemented as a streaming protocol.
 The socket implementation provides for asynchronous, ordered message passing over unix or tcp.
 Messages are serialized using Protobuf3 and length-prefixed with a [signed Varint](https://developers.google.com/protocol-buffers/docs/encoding?csw=1#signed-integers)
 
-For example, if the Protobuf3 encoded ABCI message is `0xDEADBEEF` (4 bytes), the length-prefixed message is `0x08DEADBEEF`, since `0x08` is the signed varint
-encoding of `4`. If the Protobuf3 encoded ABCI message is 65535 bytes long, the length-prefixed message would be like `0xFEFF07...`.
+For example, if the Protobuf3 encoded asura message is `0xDEADBEEF` (4 bytes), the length-prefixed message is `0x08DEADBEEF`, since `0x08` is the signed varint
+encoding of `4`. If the Protobuf3 encoded asura message is 65535 bytes long, the length-prefixed message would be like `0xFEFF07...`.
 
 Note the benefit of using this `varint` encoding over the old version (where integers were encoded as `<len of len><big endian len>` is that
 it is the standard way to encode integers in Protobuf. It is also generally shorter.
@@ -75,14 +75,14 @@ it is the standard way to encode integers in Protobuf. It is also generally shor
 ### GRPC
 
 GRPC is an rpc framework native to Protocol Buffers with support in many languages.
-Implementing the ABCI using GRPC can allow for faster prototyping, but is expected to be much slower than
+Implementing the asura using GRPC can allow for faster prototyping, but is expected to be much slower than
 the ordered, asynchronous socket protocol. The implementation has also not received as much testing or review.
 
 Note the length-prefixing used in the socket implementation does not apply for GRPC.
 
 ## Usage
 
-The `asura-cli` tool wraps an ABCI client and can be used for probing/testing an ABCI server.
+The `asura-cli` tool wraps an asura client and can be used for probing/testing an asura server.
 For instance, `asura-cli test` will run a test sequence against a listening server running the Counter application (see below).
 It can also be used to run some example applications.
 See [the documentation](http://teragrid.readthedocs.io/en/master/) for more details.
@@ -105,11 +105,11 @@ func cmdCounter(cmd *cobra.Command, args []string) error {
 	logger := log.NewTMLogger(log.NewSyncWriter(os.Stdout))
 
 	// Start the listener
-	srv, err := server.NewServer(flagAddrC, flagAbci, app)
+	srv, err := server.NewServer(flagAddrC, flagasura, app)
 	if err != nil {
 		return err
 	}
-	srv.SetLogger(logger.With("module", "abci-server"))
+	srv.SetLogger(logger.With("module", "asura-server"))
 	if err := srv.Start(); err != nil {
 		return err
 	}
@@ -143,11 +143,11 @@ func cmdKVStore(cmd *cobra.Command, args []string) error {
 	}
 
 	// Start the listener
-	srv, err := server.NewServer(flagAddrD, flagAbci, app)
+	srv, err := server.NewServer(flagAddrD, flagasura, app)
 	if err != nil {
 		return err
 	}
-	srv.SetLogger(logger.With("module", "abci-server"))
+	srv.SetLogger(logger.With("module", "asura-server"))
 	if err := srv.Start(); err != nil {
 		return err
 	}

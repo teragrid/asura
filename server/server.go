@@ -1,5 +1,5 @@
 /*
-Package server is used to start a new ABCI server.
+Package server is used to start a new asura server.
 
 It contains two server implementation:
  * gRPC server
@@ -12,8 +12,8 @@ package server
 import (
 	"fmt"
 
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 func NewServer(protoAddr, transport string, app types.Application) (cmn.Service, error) {

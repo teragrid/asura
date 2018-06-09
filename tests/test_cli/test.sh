@@ -17,7 +17,7 @@ function testExample() {
 	echo "Example $N: $APP"
 	$APP &> /dev/null &
 	sleep 2
-	abci-cli --log_level=error --verbose batch < "$INPUT" > "${INPUT}.out.new"
+	asura-cli --log_level=error --verbose batch < "$INPUT" > "${INPUT}.out.new"
 	killall "$3"
 
 	pre=$(shasum < "${INPUT}.out")
@@ -35,8 +35,8 @@ function testExample() {
 	rm "${INPUT}".out.new
 }
 
-testExample 1 tests/test_cli/ex1.abci abci-cli kvstore
-testExample 2 tests/test_cli/ex2.abci abci-cli counter
+testExample 1 tests/test_cli/ex1.asura asura-cli kvstore
+testExample 2 tests/test_cli/ex2.asura asura-cli counter
 
 echo ""
 echo "PASS"

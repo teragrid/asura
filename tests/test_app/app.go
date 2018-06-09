@@ -5,34 +5,34 @@ import (
 	"fmt"
 	"os"
 
-	abcicli "github.com/tendermint/abci/client"
-	"github.com/tendermint/abci/types"
-	"github.com/tendermint/tmlibs/log"
+	asuracli "github.com/teragrid/asura/client"
+	"github.com/teragrid/asura/types"
+	"github.com/teragrid/teralibs/log"
 )
 
-func startClient(abciType string) abcicli.Client {
+func startClient(asuraType string) asuracli.Client {
 	// Start client
-	client, err := abcicli.NewClient("tcp://127.0.0.1:46658", abciType, true)
+	client, err := asuracli.NewClient("tcp://127.0.0.1:46658", asuraType, true)
 	if err != nil {
 		panic(err.Error())
 	}
 	logger := log.NewTMLogger(log.NewSyncWriter(os.Stdout))
-	client.SetLogger(logger.With("module", "abcicli"))
+	client.SetLogger(logger.With("module", "asuracli"))
 	if err := client.Start(); err != nil {
-		panicf("connecting to abci_app: %v", err.Error())
+		panicf("connecting to asura_app: %v", err.Error())
 	}
 
 	return client
 }
 
-func setOption(client abcicli.Client, key, value string) {
+func setOption(client asuracli.Client, key, value string) {
 	_, err := client.SetOptionSync(types.RequestSetOption{key, value})
 	if err != nil {
 		panicf("setting %v=%v: \nerr: %v", key, value, err)
 	}
 }
 
-func commit(client abcicli.Client, hashExp []byte) {
+func commit(client asuracli.Client, hashExp []byte) {
 	res, err := client.CommitSync()
 	if err != nil {
 		panicf("client error: %v", err)
@@ -42,7 +42,7 @@ func commit(client abcicli.Client, hashExp []byte) {
 	}
 }
 
-func deliverTx(client abcicli.Client, txBytes []byte, codeExp uint32, dataExp []byte) {
+func deliverTx(client asuracli.Client, txBytes []byte, codeExp uint32, dataExp []byte) {
 	res, err := client.DeliverTxSync(txBytes)
 	if err != nil {
 		panicf("client error: %v", err)
@@ -55,7 +55,7 @@ func deliverTx(client abcicli.Client, txBytes []byte, codeExp uint32, dataExp []
 	}
 }
 
-/*func checkTx(client abcicli.Client, txBytes []byte, codeExp uint32, dataExp []byte) {
+/*func checkTx(client asuracli.Client, txBytes []byte, codeExp uint32, dataExp []byte) {
 	res, err := client.CheckTxSync(txBytes)
 	if err != nil {
 		panicf("client error: %v", err)

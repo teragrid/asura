@@ -1,4 +1,4 @@
-package abcicli
+package asuracli
 
 import (
 	"bufio"
@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tendermint/abci/types"
-	cmn "github.com/tendermint/tmlibs/common"
+	"github.com/teragrid/asura/types"
+	cmn "github.com/teragrid/teralibs/common"
 )
 
 const reqQueueSize = 256 // TODO make configurable
@@ -67,7 +67,7 @@ RETRY_LOOP:
 			if cli.mustConnect {
 				return err
 			}
-			cli.Logger.Error(fmt.Sprintf("abci.socketClient failed to connect to %v.  Retrying...", cli.addr))
+			cli.Logger.Error(fmt.Sprintf("asura.socketClient failed to connect to %v.  Retrying...", cli.addr))
 			time.Sleep(time.Second * dialRetryIntervalSeconds)
 			continue RETRY_LOOP
 		}
@@ -104,7 +104,7 @@ func (cli *socketClient) StopForError(err error) {
 	}
 	cli.mtx.Unlock()
 
-	cli.Logger.Error(fmt.Sprintf("Stopping abci.socketClient for error: %v", err.Error()))
+	cli.Logger.Error(fmt.Sprintf("Stopping asura.socketClient for error: %v", err.Error()))
 	cli.Stop()
 }
 
