@@ -21,7 +21,7 @@ type grpcClient struct {
 	cmn.BaseService
 	mustConnect bool
 
-	client types.asuraApplicationClient
+	client types.AsuraApplicationClient
 
 	mtx   sync.Mutex
 	addr  string
@@ -53,13 +53,13 @@ RETRY_LOOP:
 			if cli.mustConnect {
 				return err
 			}
-			cli.Logger.Error(fmt.Sprintf("asura.grpcClient failed to connect to %v.  Retrying...\n", cli.addr))
+			cli.Logger.Error(fmt.Sprintf("Asura.grpcClient failed to connect to %v.  Retrying...\n", cli.addr))
 			time.Sleep(time.Second * dialRetryIntervalSeconds)
 			continue RETRY_LOOP
 		}
 
 		cli.Logger.Info("Dialed server. Waiting for echo.", "addr", cli.addr)
-		client := types.NewasuraApplicationClient(conn)
+		client := types.NewAsuraApplicationClient(conn)
 
 	ENSURE_CONNECTED:
 		for {
@@ -97,7 +97,7 @@ func (cli *grpcClient) StopForError(err error) {
 	}
 	cli.mtx.Unlock()
 
-	cli.Logger.Error(fmt.Sprintf("Stopping asura.grpcClient for error: %v", err.Error()))
+	cli.Logger.Error(fmt.Sprintf("Stopping Asura.grpcClient for error: %v", err.Error()))
 	cli.Stop()
 }
 

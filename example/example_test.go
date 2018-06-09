@@ -127,7 +127,7 @@ func testGRPCSync(t *testing.T, app *types.GRPCApplication) {
 	}
 	defer conn.Close()
 
-	client := types.NewasuraApplicationClient(conn)
+	client := types.NewAsuraApplicationClient(conn)
 
 	// Write requests
 	for counter := 0; counter < numDeliverTxs; counter++ {
