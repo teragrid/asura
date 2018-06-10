@@ -24,6 +24,7 @@ protoc:
 	@echo "--> adding nolint declarations to protobuf generated files"
 	@awk '/package types/ { print "//nolint: gas"; print; next }1' types/types.pb.go > types/types.pb.go.new
 	@mv types/types.pb.go.new types/types.pb.go
+	@echo "--> done moving types/types.pb.go to the right place"
 
 build:
 	@go build -i ./cmd/...

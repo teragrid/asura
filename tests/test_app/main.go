@@ -47,16 +47,16 @@ func ensureasuraIsUp(typ string, n int) error {
 }
 
 func testCounter() {
-	asuraApp := os.Getenv("asura_APP")
-	if asuraApp == "" {
+	AsuraApp := os.Getenv("asura_APP")
+	if AsuraApp == "" {
 		panic("No asura_APP specified")
 	}
 
-	fmt.Printf("Running %s test with asura=%s\n", asuraApp, asuraType)
-	cmd := exec.Command("bash", "-c", fmt.Sprintf("asura-cli %s", asuraApp)) // nolint: gas
+	fmt.Printf("Running %s test with asura=%s\n", AsuraApp, asuraType)
+	cmd := exec.Command("bash", "-c", fmt.Sprintf("asura-cli %s", AsuraApp)) // nolint: gas
 	cmd.Stdout = os.Stdout
 	if err := cmd.Start(); err != nil {
-		log.Fatalf("starting %q err: %v", asuraApp, err)
+		log.Fatalf("starting %q err: %v", AsuraApp, err)
 	}
 	defer cmd.Wait()
 	defer cmd.Process.Kill()
