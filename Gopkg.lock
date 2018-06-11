@@ -51,14 +51,14 @@
     "ptypes/duration",
     "ptypes/timestamp"
   ]
-  revision = "925541529c1fa6821df4e44ce2723319eb2be768"
-  version = "v1.0.0"
+  revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
+  version = "v1.1.0"
 
 [[projects]]
   branch = "master"
   name = "github.com/golang/snappy"
   packages = ["."]
-  revision = "553a641470496b2327abcac10b36396bd98e45c9"
+  revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
 
 [[projects]]
   name = "github.com/inconshreveable/mousetrap"
@@ -108,8 +108,8 @@
     "assert",
     "require"
   ]
-  revision = "12b6f73e6084dad08a7c6e575284b177ecafbc71"
-  version = "v1.2.1"
+  revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
+  version = "v1.2.2"
 
 [[projects]]
   branch = "master"
@@ -128,7 +128,7 @@
     "leveldb/table",
     "leveldb/util"
   ]
-  revision = "714f901b98fdb3aa954b4193d8cbd64a28d80cad"
+  revision = "e2150783cd35f5b607daca48afd8c57ec54cc995"
 
 [[projects]]
   branch = "master"
@@ -138,21 +138,21 @@
     "db",
     "log"
   ]
-  revision = "902ce4ac33bbbdcec038d62deabb0b595d5b0f55"
+  revision = "49b8eb37be66767c51793b7ee272e1e6c95c5371"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = [
     "context",
+    "http/httpguts",
     "http2",
     "http2/hpack",
     "idna",
     "internal/timeseries",
-    "lex/httplex",
     "trace"
   ]
-  revision = "61147c48b25b599e5b561d2e9c4f3e1ef489ca41"
+  revision = "1e491301e022f8f977054da4c2d852decd59571f"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -179,7 +179,7 @@
   branch = "master"
   name = "google.golang.org/genproto"
   packages = ["googleapis/rpc/status"]
-  revision = "ce84044298496ef4b54b4a0a0909ba593cc60e30"
+  revision = "32ee49c4dd805befd833990acba36cb75042378c"
 
 [[projects]]
   name = "google.golang.org/grpc"
