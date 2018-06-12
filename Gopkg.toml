@@ -8,7 +8,7 @@
 #
 # [[constraint]]
 #   name = "github.com/user/project"
-#   version = "1.0.0"
+#   version = "1.1.0"
 #
 # [[constraint]]
 #   name = "github.com/user/project2"
@@ -33,7 +33,7 @@
 
 [[constraint]]
   name = "github.com/gogo/protobuf"
-  version = "~3.5.1"
+  version = "~1.1.0"
 
 [[constraint]]
   name = "github.com/spf13/cobra"
