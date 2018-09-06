@@ -1,15 +1,13 @@
-# Asura - Application BlockChain Interface (asura)
-
-[![CircleCI](https://circleci.com/gh/teragrid/asura.svg?style=svg)](https://circleci.com/gh/teragrid/asura)
+# Asura - Service Abstract Layer (SAL)
 
 Blockchains are systems for multi-master state machine replication.
-**Asura** is an interface that defines the boundary between the replication engine (the blockchain),
+**Asura** is an interface or a middle layer that defines the boundary between the replication engine (the blockchain),
 and the state machine (the application).
 By using a socket protocol, we enable a consensus engine running in one process
 to manage an application state running in another.
 
 For background information on asura, motivations, and teragrid, please visit [the documentation](http://teragrid.readthedocs.io/en/master/).
-The two guides to focus on are the `Application Development Guide` and `Using asura-CLI`.
+The two guides to focus on are the `Application Development Guide` and `Using Asura-CLI`.
 
 Previously, the asura was referred to as TMSP.
 
